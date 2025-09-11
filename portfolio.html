@@ -2,21 +2,46 @@
 <html>
 <head>
 <title>Portfolio</title>
-<link rel="stylesheet" type="text/css" href="style.css"></link>
+<link id="pagestyle" rel="stylesheet" type="text/css" href="style.css" data-theme-default="style.css" data-theme-alt="style2.css"></link>
+
 </head>
 
-<header>
-<button onclick="document.location='index.html'">&#8592;</button>
-
-<h1>Portfolio</h1>
-</header>
 
 <body> 
-<h3>AI Study Guide</h3>
-<p>Developed a full-stack web application designed to teach STEM with AI integration</p>
-<h3>AI ChatBot</h3>
-<p>Planning to integrate an AI ChatBot that is trained for specifically for cooking</p>
-<h3>AI Opponent</h3>
-<p>Planning to develop an AI opponent that is able to play chess and use tactics</p>
+
+<header>
+<h1>Henny Koh</h1>
+<h3></h3></h2>Texas A&M at College Station Texas</p>
+<p>Computer Science - BS</p>
+
+<button onclick="document.location='index.html'">Home</button>
+<button onclick="document.location='portfolio.html'">Portfolio</button>
+<button onclick="document.location='qualifications.html'">Qualifications</button>
+<button onclick="document.location='service.html'">Services</button>
+<button onclick="document.location='genai.html'">Gen AI</button>
+<button id = "toggleBtn">Change Style</button>
+<script src="functions.js"></script>
+</header>
+
+<div class="projectgrid">
+    <div class="projects">
+        <a href="https://www.youtube.com/watch?v=q5WHxX2ve5A" target="_blank">
+            <img src="stem.png" alt="stem" class="projectimg" width:200px; height:200px;>
+        </a>
+        <h3>STEM Learning Platform</h3>
+        <p>This was a group project done at the Aggie Coding Club. We developed a full-stack web application to teach STEM concepts with interactive content and UI designs. We had maintained PostgreSQL database with Prisma ORM to organize and query user data efficiently. By integrating OpenAI API to deliver adaptive study techniques, we improved engagement and effectiveness.</p>
+    </div>
+
+    <div class="projects">
+        <div class="ML ChessBot">
+            <a href="https://www.chess.com" target="_blank">
+             <img src="chess.png" alt="chess" class="projectimg" width:200px; height:200px;>
+            </a>
+            <h3>AI Chess Bot</h3>
+            <p>I developed a machine learning chess engine in Python using PyTorch, trained on a dataset of 10M+ PGN games (from the LiChess database) to predict human-like moves. With a data pipeline using python-chess and Zstandard to stream compressed game files efficiently, I was able to generate training samples, and tested on the bots on Chess.com.
+        training samples.</p>
+    </div>
+</div>
 
 </body>
+</html>

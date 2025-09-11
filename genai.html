@@ -1,17 +1,265 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-<title>Gen AI</title>
-<link rel="stylesheet" type="text/css" href="style.css"></link>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GenAI Capabilities</title>
+  <style>
+    :root{
+      --bg: #0f172a;
+      --card: #111827;
+      --muted: #94a3b8;
+      --ink: #e5e7eb;
+      --accent1: #22c55e;
+      --accent2: #60a5fa;
+      --accent3: #f59e0b;
+      --ring: rgba(255,255,255,.12);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; background: var(--bg); color: var(--ink); line-height: 1.55}
+    .container{max-width:1100px;margin:0 auto;padding:0 20px}
+
+    header{
+      background: radial-gradient(1200px 400px at 50% -50px, #14532d, #0a2a1a 60%, transparent 70%), linear-gradient(135deg,#065f46,#047857);
+      padding: 56px 0 36px; color:#e8ffe8; position:relative; border-bottom-left-radius: 28px; border-bottom-right-radius: 28px; box-shadow: var(--shadow);
+    }
+    header h1{margin:0 0 6px;font-size:clamp(28px,5vw,44px);letter-spacing:.2px}
+    header p{margin:6px 0 0;color:#d1fae5;font-size:clamp(14px,2.6vw,18px)}
+
+    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+    .btn{border:1px solid var(--ring);background:#0b3b22;color:#eafff3;padding:10px 14px;border-radius:12px;cursor:pointer;transition:transform .06s ease, background .15s ease}
+    .btn:hover{background:#0d4728}
+    .btn:active{transform:translateY(1px) scale(.98)}
+
+    main{padding:30px 0 60px}
+
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    @media (max-width: 980px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width: 640px){.grid{grid-template-columns:1fr}}
+
+    .card{background:var(--card);border:1px solid var(--ring);border-radius:16px;padding:18px;box-shadow: var(--shadow)}
+    .card h3{margin:6px 0 6px;font-size:20px}
+    .card p{margin:8px 0;color:var(--muted)}
+    .pill{font-size:12px;padding:4px 8px;border-radius:999px;border:1px solid var(--ring);color:#cbd5e1;display:inline-flex;align-items:center;gap:6px}
+
+    .kicker{display:flex;align-items:center;gap:10px;color:#a7f3d0}
+
+    .demo{display:grid;grid-template-columns: 1.2fr .8fr; gap:18px;margin-top:22px}
+    @media (max-width: 980px){.demo{grid-template-columns:1fr}}
+    .panel{background:#0b1220;border:1px solid var(--ring);border-radius:14px;padding:16px;box-shadow: var(--shadow)}
+    .panel h4{margin:0 0 10px}
+
+    textarea, select, input[type="text"]{width:100%;background:#0a0f1a;border:1px solid var(--ring);color:var(--ink);border-radius:10px;padding:10px;outline:none}
+    textarea{min-height:120px;resize:vertical}
+
+    .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .btn-ghost{background:transparent;border:1px dashed var(--ring);color:#cbd5e1;padding:8px 12px;border-radius:10px;cursor:pointer}
+    .btn-ghost:hover{background:#0c1526}
+
+    .output{white-space:pre-wrap;background:#0a0f1a;border:1px solid var(--ring);border-radius:10px;padding:12px;min-height:140px}
+
+    .log{max-height:260px;overflow:auto;border:1px solid var(--ring);background:#0b1220;border-radius:12px}
+    .log-item{padding:12px;border-bottom:1px solid rgba(255,255,255,.06)}
+    .log-item:last-child{border-bottom:none}
+    .small{font-size:12px;color:#94a3b8}
+
+    .footer{color:#94a3b8;font-size:13px;margin-top:24px}
+
+    .badge{font-size:12px;border:1px solid var(--ring);border-radius:8px;padding:2px 8px;margin-left:6px;color:#cbd5e1}
+
+    .cap-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+    .cap{border:1px solid var(--ring);padding:6px 10px;border-radius:999px;background:#0b1220;color:#cbd5e1;font-size:13px}
+
+    .copy-btn{background:#0b3b22;border:1px solid var(--ring);color:#d1fae5;border-radius:10px;padding:6px 10px;cursor:pointer}
+    .copy-btn:hover{background:#0d4728}
+
+    .nav{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+  </style>
 </head>
-
-<header>
-<button onclick="document.location='index.html'">&#8592;</button>
-
-<h1>Generative AI</h1>
-</header>
-
 <body>
-<p>Work in progress</p>
-</body>
-</html>
+  <header>
+    <div class="container">
+      <div class="kicker">
+        <span class="pill">⚙️ GenAI Showcase</span>
+        <span class="pill">Single‑file HTML</span>
+        <span class="pill">No external libs</span>
+      </div>
+      <h1>What Can Generative AI Do?</h1>
+      <p>Explore common capabilities—content, code, images, data, chat—and log the prompts you used to make this page.</p>
+      <div class="actions">
+        <button class="btn" id="btnScrollDemo">Try a Demo</button>
+        <button class="btn" id="btnScrollLog">View Prompt Log</button>
+      </div>
+      <div class="nav">
+        <a href="index.html" class="btn">Home</a>
+        <a href="portfolio.html" class="btn">Portfolio</a>
+        <a href="qualifications.html" class="btn">Qualifications</a>
+        <a href="service.html" class="btn">Services</a>
+        <a href="genai.html" class="btn">Gen AI</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section style="margin-top:26px">
+      <div class="grid">
+        <article class="card">
+          <h3>📝 Content Generation</h3>
+          <p>Draft emails, blog posts, summaries, outlines, and translations. Refine tone, length, and clarity instantly.</p>
+          <div class="cap-list">
+            <span class="cap">Summarize</span><span class="cap">Rewrite</span><span class="cap">Translate</span><span class="cap">Brainstorm</span>
+          </div>
+        </article>
+        <article class="card">
+          <h3>💻 Code Assistance</h3>
+          <p>Explain code, propose fixes, generate boilerplate, and suggest tests across languages and frameworks.</p>
+          <div class="cap-list">
+            <span class="cap">Explain</span><span class="cap">Refactor</span><span class="cap">Comment</span><span class="cap">Test ideas</span>
+          </div>
+        </article>
+        <article class="card">
+          <h3>🖼️ Creative Assets</h3>
+          <p>Generate image concepts, style directions, and UX copy. (Image synthesis typically requires a model API.)</p>
+          <div class="cap-list">
+            <span class="cap">Concepts</span><span class="cap">Variations</span><span class="cap">Storyboards</span>
+          </div>
+        </article>
+        <article class="card">
+          <h3>📊 Data & Analysis</h3>
+          <p>Turn raw text into tables, create lightweight analyses, suggest charts, and draft SQL queries from prose.</p>
+          <div class="cap-list">
+            <span class="cap">Extract</span><span class="cap">Structure</span><span class="cap">Query</span>
+          </div>
+        </article>
+        <article class="card">
+          <h3>🗣️ Conversational UX</h3>
+          <p>Build chat flows, onboard users, collect info, and provide guidance with friendly, adaptive responses.</p>
+          <div class="cap-list">
+            <span class="cap">Onboarding</span><span class="cap">Helpdesk</span><span class="cap">Tutoring</span>
+          </div>
+        </article>
+        <article class="card">
+          <h3>🔒 Safety & Limits</h3>
+          <p>Always design for privacy, bias reduction, and safe outputs. Add guardrails, human review, and logging.</p>
+          <div class="cap-list">
+            <span class="cap">Guardrails</span><span class="cap">Rate limits</span><span class="cap">Human-in-loop</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="demo" id="demo">
+      <div class="panel">
+        <h4>🧪 Lightweight Demo (offline)</h4>
+        <p class="small">This is a local, simulated demo (no external AI calls). Use it to illustrate prompting concepts.</p>
+        <label class="small" for="capability">Capability</label>
+        <select id="capability" style="margin-top:6px">
+          <option value="summarize">Summarize text</option>
+          <option value="rewrite">Rewrite for clarity</option>
+          <option value="ideas">Brainstorm ideas</option>
+          <option value="regex">Explain a regex</option>
+          <option value="sql">Draft a SQL query</option>
+          <option value="outline">Make an outline</option>
+        </select>
+
+        <label class="small" for="prompt" style="display:block;margin-top:10px">Prompt</label>
+        <textarea id="prompt" placeholder="Paste or type your prompt here..."></textarea>
+
+        <div class="toolbar">
+          <button class="btn" id="run">Generate</button>
+          <button class="btn-ghost" id="clear">Clear</button>
+          <button class="btn-ghost" id="copyOut">Copy Output</button>
+        </div>
+
+        <div style="margin-top:12px">
+          <div class="small" style="margin:0 0 6px">Output</div>
+          <div class="output" id="output" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h4>🗒️ Prompt Log</h4>
+        <p class="small">Keep a record of the prompts you used to build this page. Stored in your browser only.</p>
+        <div class="toolbar">
+          <button class="btn" id="save">Add to Log</button>
+          <button class="btn-ghost" id="export">Export .txt</button>
+          <button class="btn-ghost" id="clearLog">Clear Log</button>
+        </div>
+        <div class="log" id="log" style="margin-top:10px"></div>
+      </div>
+    </section>
+
+    <section class="footer">
+      <span>Tip: Pair real model outputs with this page when you present. Use consistent prompts and show short vs. long prompts.</span>
+      <span class="badge">Local demo</span>
+      <span class="badge">No network calls</span>
+    </section>
+  </main>
+
+  <script>
+    const $ = (s) => document.querySelector(s);
+    const fmtTime = (d=new Date()) => d.toLocaleString();
+
+    function generate(kind, text){
+      const t = (text||'').trim();
+      if(!t){ return 'Please enter a prompt above.'; }
+      switch(kind){
+        case 'summarize':{
+          const words = t.split(/\s+/).slice(0, Math.max(12, Math.ceil(t.split(/\s+/).length*0.35)));
+          return 'Summary (approx.):\n' + words.join(' ') + (words.length < t.split(/\s+/).length ? '…' : '');
+        }
+        case 'rewrite':{
+          return 'Rewritten for clarity:\n' + t
+            .replace(/\butilize\b/gi, 'use')
+            .replace(/\bin order to\b/gi, 'to')
+            .replace(/\bvery\b/gi, '')
+            .replace(/[;:]{2,}/g, ':')
+            .replace(/\s+/g,' ') ;
+        }
+        case 'ideas':{
+          const topic = t.split(/[.!?]/)[0].slice(0,60) || 'your topic';
+          return ['Ideas:', `• Contrast two approaches to ${topic}.`, `• Create a 5-step plan for ${topic}.`, `• Draft a FAQ for ${topic}.`, `• Identify risks & mitigations for ${topic}.`].join('\n');
+        }
+        case 'regex':{
+          return `Regex notes:\n- Pattern: /${t.replace(/\//g,'\\/')}/\n- Explain groups, anchors (^ $), quantifiers (* + ? {n}), and flags.\n- Provide 2 matching and 2 non-matching examples.`;
+        }
+        case 'sql':{
+          return `SQL draft:\nSELECT column_list\nFROM your_table\nWHERE /* translate: ${t.slice(0,80)}… */;\n-- Add GROUP BY / ORDER BY as needed.`;
+        }
+        case 'outline':{
+          return `Outline:\nI. Goal\nII. Inputs\nIII. Method\nIV. Edge cases\nV. Output & next steps\n-- Topic: ${t.slice(0,100)}…`;
+        }
+        default: return 'Select a capability and enter a prompt.';
+      }
+    }
+
+    const capability = $('#capability');
+    const promptEl = $('#prompt');
+    const output = $('#output');
+    const logEl = $('#log');
+
+    $('#run').addEventListener('click', () => {
+      output.textContent = generate(capability.value, promptEl.value);
+      window.scrollTo({ top: output.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+    });
+    $('#clear').addEventListener('click', () => { promptEl.value=''; output.textContent=''; });
+    $('#copyOut').addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(output.textContent || ''); } catch(e){}
+    });
+
+    const KEY = 'genai_prompt_log_v1';
+    function loadLog(){
+      const items = JSON.parse(localStorage.getItem(KEY) || '[]');
+      logEl.innerHTML = items.map(item => `\n        <div class=\"log-item\">\n          <div class=\"small\">${item.time}</div>\n          <div><strong>Capability:</strong> ${item.kind}</div>\n          <div style=\"margin-top:4px;color:#cbd5e1\"><em>Prompt</em>: ${escapeHtml(item.prompt)}</div>\n          ${item.output ? `<div class=\"small\" style=\"margin-top:6px;color:#9ca3af\">Saved output (${item.output.length} chars)</div>`:''}\n        </div>`).join('');
+    }
+    function saveLogEntry(){
+      const items = JSON.parse(localStorage.getItem(KEY) || '[]');
+      items.unshift({ time: fmtTime(), kind: capability.value, prompt: promptEl.value, output: output.textContent });
+      localStorage.setItem(KEY, JSON.stringify(items.slice(0,200)));
+      loadLog();
+    }
+    function clearLog(){ localStorage.removeItem(KEY); loadLog(); }
+
+    function escapeHtml(s){ return s.replace(/[&<>\

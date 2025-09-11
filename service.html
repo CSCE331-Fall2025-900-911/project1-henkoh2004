@@ -2,16 +2,44 @@
 <html>
 <head>
 <title>Service</title>
-<link rel="stylesheet" type="text/css" href="style.css"></link>
-</head>
+<link id="pagestyle" rel="stylesheet" type="text/css" href="style.css" data-theme-default="style.css" data-theme-alt="style2.css"></link>
 
-<header>
-<button onclick="document.location='index.html'">&#8592;</button>
-<h1>Services</h1>
-</header>
+</head>
 
 <body>
 
-<img src="sec.webp" alt="SEC">
-<p>I plan to join our school's Student Engineering Council for opportunites 
-    to volunteer and give back to th engineering community.</p>
+<header>
+<h1>Henny Koh</h1>
+<h3></h3></h2>Texas A&M at College Station Texas</p>
+<p>Computer Science - BS</p>
+
+<button onclick="document.location='index.html'">Home</button>
+<button onclick="document.location='portfolio.html'">Portfolio</button>
+<button onclick="document.location='qualifications.html'">Qualifications</button>
+<button onclick="document.location='service.html'">Services</button>
+<button onclick="document.location='genai.html'">Gen AI</button>
+<button id = "toggleBtn">Change Style</button>
+<script src="functions.js"></script>
+</header>
+
+<div class="projectgrid">
+    <div class="projects">
+        <a href="https://home.sec.tamu.edu/" target="_blank">
+            <img src="sec.webp" alt="SEC" class="projectimg" width:200px; height:200px;>
+        </a>
+        <h3>Student Engineering Council</h3>
+        <p>I plan to join our school's Student Engineering Council for opportunites to volunteer and give back to the engineering community. I strive to have my fellow aggies excel in the engineering workforce.</p>
+    </div>
+
+    <div class="projects">
+        <a href="https://asc.tamu.edu/tutoring" target="_blank">
+            <img src="tamu.png" alt="tamu" class="projectimg" width:200px; height:200px;>
+        </a>
+        <h3>Math Tutor</h3>
+        <p>I provided one-on-one tutoring over Calculus I and Linear Algebra for fellow Aggies. From this experience, I was able to gain personal growth in communication skills and leadership qualities.</p>
+    </div>
+</div>
+
+
+</body>
+</html>
