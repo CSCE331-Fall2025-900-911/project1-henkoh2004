@@ -10,15 +10,21 @@
 
 <header>
 <h1>Henny Koh</h1>
-<h3></h3></h2>Texas A&M at College Station Texas</p>
+<p>Texas A&M at College Station Texas</p>
 <p>Computer Science - BS</p>
 
-<button onclick="document.location='index.html'">Home</button>
-<button onclick="document.location='portfolio.html'">Portfolio</button>
-<button onclick="document.location='qualifications.html'">Qualifications</button>
-<button onclick="document.location='service.html'">Services</button>
-<button onclick="document.location='genai.html'">Gen AI</button>
-<button id = "toggleBtn">Change Style</button>
+<div class="sidebar" id="mySidebar">
+    <button id = "closeBtn" onclick="w3_close()">Close &times;</button>
+    <button onclick="document.location='index.html'">Home</button>
+    <button onclick="document.location='portfolio.html'">Portfolio</button>
+    <button onclick="document.location='qualifications.html'">Qualifications</button>
+    <button onclick="document.location='service.html'">Services</button>
+    <button onclick="document.location='genai.html'">Gen AI</button>
+    <button id = "toggleBtn" type = "button">Change Style</button>
+</div>
+
+<button id="openBtn" onclick="w3_open()">&#9776</button>
+
 <script src="functions.js"></script>
 </header>
 
@@ -27,16 +33,20 @@
         <a href="https://home.sec.tamu.edu/" target="_blank">
             <img src="sec.webp" alt="SEC" class="projectimg" width:200px; height:200px;>
         </a>
+        <div class="info">
         <h3>Student Engineering Council</h3>
         <p>I plan to join our school's Student Engineering Council for opportunites to volunteer and give back to the engineering community. I strive to have my fellow aggies excel in the engineering workforce.</p>
+        </div>
     </div>
 
     <div class="projects">
         <a href="https://asc.tamu.edu/tutoring" target="_blank">
             <img src="tamu.png" alt="tamu" class="projectimg" width:200px; height:200px;>
         </a>
+        <div class="info">
         <h3>Math Tutor</h3>
         <p>I provided one-on-one tutoring over Calculus I and Linear Algebra for fellow Aggies. From this experience, I was able to gain personal growth in communication skills and leadership qualities.</p>
+        </div>
     </div>
 </div>
 

@@ -11,35 +11,43 @@
 
 <header>
 <h1>Henny Koh</h1>
-<h3></h3></h2>Texas A&M at College Station Texas</p>
+<p>Texas A&M at College Station Texas</p>
 <p>Computer Science - BS</p>
 
-<button onclick="document.location='index.html'">Home</button>
-<button onclick="document.location='portfolio.html'">Portfolio</button>
-<button onclick="document.location='qualifications.html'">Qualifications</button>
-<button onclick="document.location='service.html'">Services</button>
-<button onclick="document.location='genai.html'">Gen AI</button>
-<button id = "toggleBtn">Change Style</button>
+<div class="sidebar" id="mySidebar">
+    <button id = "closeBtn" onclick="w3_close()">Close &times;</button>
+    <button onclick="document.location='index.html'">Home</button>
+    <button onclick="document.location='portfolio.html'">Portfolio</button>
+    <button onclick="document.location='qualifications.html'">Qualifications</button>
+    <button onclick="document.location='service.html'">Services</button>
+    <button onclick="document.location='genai.html'">Gen AI</button>
+    <button id = "toggleBtn" type = "button">Change Style</button>
+</div>
+
+<button id="openBtn" onclick="w3_open()">&#9776</button>
+
 <script src="functions.js"></script>
 </header>
 
 <div class="projectgrid">
     <div class="projects">
         <a href="https://www.youtube.com/watch?v=q5WHxX2ve5A" target="_blank">
-            <img src="stem.png" alt="stem" class="projectimg" width:200px; height:200px;>
+            <img src="stem.png" alt="stem" class="projectimg">
         </a>
-        <h3>STEM Learning Platform</h3>
-        <p>This was a group project done at the Aggie Coding Club. We developed a full-stack web application to teach STEM concepts with interactive content and UI designs. We had maintained PostgreSQL database with Prisma ORM to organize and query user data efficiently. By integrating OpenAI API to deliver adaptive study techniques, we improved engagement and effectiveness.</p>
+        <div class="info">
+            <h3>STEM Learning Platform</h3>
+            <p>This was a group project done at the Aggie Coding Club. We developed a full-stack web application to teach STEM concepts with interactive content and UI designs. We had maintained PostgreSQL database with Prisma ORM to organize and query user data efficiently. By integrating OpenAI API to deliver adaptive study techniques, we improved engagement and effectiveness.</p>
+        </div>
     </div>
 
     <div class="projects">
-        <div class="ML ChessBot">
-            <a href="https://www.chess.com" target="_blank">
-             <img src="chess.png" alt="chess" class="projectimg" width:200px; height:200px;>
-            </a>
+        <a href="https://www.chess.com" target="_blank">
+            <img src="chess.png" alt="chess" class="projectimg" width:200px; height:200px;>
+        </a>
+        <div class="info">
             <h3>AI Chess Bot</h3>
-            <p>I developed a machine learning chess engine in Python using PyTorch, trained on a dataset of 10M+ PGN games (from the LiChess database) to predict human-like moves. With a data pipeline using python-chess and Zstandard to stream compressed game files efficiently, I was able to generate training samples, and tested on the bots on Chess.com.
-        training samples.</p>
+            <p>I developed a machine learning chess engine in Python using PyTorch, trained on a dataset of 10M+ PGN games (from the LiChess database) to predict human-like moves. With a data pipeline using python-chess and Zstandard to stream compressed game files efficiently, I was able to generate training samples, and tested on the bots on Chess.com training samples.</p>
+        </div>
     </div>
 </div>
 
