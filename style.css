@@ -78,6 +78,10 @@ body img{
     margin-left: 120px;
     margin-bottom: 10px;
     border: 4px darkgreen solid;
+    float: left;
+    margin-right: 15px;
+    width: 200px;
+    height: 200px;
 }
 
 

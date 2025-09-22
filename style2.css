@@ -103,6 +103,10 @@ img[alt="My Photo"]{
   border-radius: 50%;
   border: 3px solid #3A3A45;
   margin: 30 500 16px;
+  float: left;
+  margin-right: 15px;
+  width: 200px;
+  height: 200px;
 }
 
 body h2{
