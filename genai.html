@@ -30,6 +30,16 @@
       --warn:#b45309;
     }
 
+    .prompt pre {
+      margin: 0;
+      white-space: pre-wrap;   /* allows wrapping */
+      word-break: break-word;  /* breaks long words if needed */
+      overflow-wrap: anywhere; /* ensures text won't overflow */
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 13px;
+      color: var(--text);
+    }
+
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
@@ -67,13 +77,13 @@
       border:1px solid transparent;
     }
     nav a:hover{ border-color:var(--border); background: color-mix(in srgb, var(--panel) 80%, transparent); }
-    .right{ display:flex; align-items:center; gap:8px; }
     .btn{
       border:1px solid var(--border); background: var(--panel); color:var(--text);
       padding:8px 12px; border-radius:10px; cursor:pointer;
     }
     .btn:hover{ background: color-mix(in srgb, var(--panel) 85%, white 15%); }
     .chip{ font-size:12px; padding:4px 8px; border:1px dashed var(--border); border-radius:999px; color:var(--muted); }
+    .right{ display:flex; align-items:center; gap:8px; }
 
     /* Layout */
     .wrap{ max-width:1100px; margin:24px auto 80px; padding:0 20px; }
@@ -96,7 +106,7 @@
       font-size:12px; background: var(--panel); padding:2px 6px; border-radius:6px; border:1px solid var(--border);
     }
 
-    /* Playground */
+    /* Inputs */
     textarea,input,select{
       width:100%; background:var(--panel); color:var(--text);
       border:1px solid var(--border); border-radius:12px; padding:12px;
@@ -115,16 +125,41 @@
     .cap h3{ margin:4px 0 6px; font-size:16px }
     .cap small{ color:var(--muted) }
 
-    /* Prompt library */
-    .prompt{
-      display:grid; grid-template-columns: 1fr auto; gap:8px; align-items:start;
-      border:1px dashed var(--border); padding:12px; border-radius:12px; background: color-mix(in srgb, var(--panel) 85%, transparent);
+    /* Prompt Panel (integrated style) */
+    #promptPanel{
+      max-width:1100px; margin:16px auto 0; padding:0 20px;
     }
-    .prompt pre{
-      margin:0; white-space:pre-wrap; word-break:break-word;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
-      font-size:13px; color:var(--text);
+    #promptCard{
+      padding:0; overflow:hidden;
     }
+    #promptCard header{
+      position:relative; top:auto; backdrop-filter:none;
+      background: color-mix(in srgb, var(--card) 82%, transparent);
+      border-bottom:1px solid var(--border);
+      border-top-left-radius:16px; border-top-right-radius:16px;
+    }
+    #promptBar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px; padding:12px 16px;
+    }
+    #promptTitle{ display:flex; align-items:center; gap:10px; }
+    #promptTitle .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(135deg, var(--brand), var(--accent));
+      box-shadow: 0 0 12px color-mix(in srgb, var(--brand) 60%, transparent);
+    }
+    #promptActions{ display:flex; gap:8px; }
+    #promptBody{ padding:12px 16px 16px; }
+    #promptText{
+      min-height:120px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      background: color-mix(in srgb, var(--panel) 90%, transparent);
+    }
+    .collapseHint{ color:var(--muted); font-size:12px; }
+
+    /* Collapsed state */
+    .collapsed #promptBody{ display:none; }
+    .collapsed #collapseBtn::after{ content:"Show"; }
+    #collapseBtn::after{ content:"Hide"; }
 
     footer{
       max-width:1100px; margin:40px auto 60px; padding:0 20px; color:var(--muted); text-align:center;
@@ -132,15 +167,37 @@
   </style>
 </head>
 <body>
+  <!-- Prompt Log Panel (Top of page, integrated styling) -->
+  <section id="promptPanel">
+    <div id="promptCard" class="card">
+      <header>
+        <div id="promptBar">
+          <div id="promptTitle">
+            <span class="dot" aria-hidden="true"></span>
+            <strong>Prompts used to generate this page</strong>
+            <span class="chip collapseHint">(panel state is remembered)</span>
+          </div>
+          <div id="promptActions">
+            <button class="btn" id="copyPrompts" aria-label="Copy prompts">Copy</button>
+            <button class="btn" id="collapseBtn" aria-label="Toggle prompt panel"></button>
+          </div>
+        </div>
+      </header>
+      <div id="promptBody">
+        <textarea id="promptText" readonly>
+1) I'm creating a personal website, and for one of my pages, I want to show the capabilities of GenAI. Create a GenAI page for my website in HTML. The header should have links that takes you to the other pages of the website (index.html, porfolio.html, qualifications.html, service.html).
 
-  <textarea id="promptLog" readonly>
-Prompts used to generate this page:
+2) On the very top of the page, add a text box that includes the prompts that I gave to generate this code. (including this prompt)
 
-1. I'm creating a personal website, and for one of my pages, I want to show the capabilities of GenAI. Create a GenAI page for my website in HTML. The header should have links that takes you to the other pages of the website (index.html, porfolio.html, qualifications.html, service.html).
+3) Integrate into the style of the current page.
 
-2. On the very top of the page, add a text box that includes the prompts that I gave to generate this code. (including this prompt)
-  </textarea>
-  
+4) The text in prompt library is getting out of the text box. Make sure the text in the prompt library wraps properly.
+        </textarea>
+      </div>
+    </div>
+  </section>
+
+  <!-- Site Header / Nav -->
   <header>
     <div class="nav">
       <div class="brand">
@@ -148,7 +205,7 @@ Prompts used to generate this page:
         <div>GenAI Showcase</div>
         <span class="chip">Demo • Client-side</span>
       </div>
-      <nav>
+      <nav class="right">
         <a href="index.html">Home</a>
         <a href="portfolio.html">Portfolio</a>
         <a href="qualifications.html">Qualifications</a>
@@ -295,6 +352,31 @@ Draft:
       localStorage.setItem('theme', document.body.classList.contains('light') ? 'light' : 'dark');
     });
 
+    // ---- Prompt panel collapse memory
+    const promptCard = document.getElementById('promptCard');
+    const collapseBtn = document.getElementById('collapseBtn');
+    const copyPrompts = document.getElementById('copyPrompts');
+    const promptText = document.getElementById('promptText');
+    const collapsedKey = 'promptPanelCollapsed';
+
+    if(localStorage.getItem(collapsedKey) === 'true'){
+      promptCard.classList.add('collapsed');
+    }
+    collapseBtn.addEventListener('click', ()=>{
+      promptCard.classList.toggle('collapsed');
+      localStorage.setItem(collapsedKey, promptCard.classList.contains('collapsed'));
+    });
+    copyPrompts.addEventListener('click', async ()=>{
+      try{
+        await navigator.clipboard.writeText(promptText.value);
+        copyPrompts.textContent = 'Copied ✓';
+        setTimeout(()=>copyPrompts.textContent='Copy', 1000);
+      }catch{
+        copyPrompts.textContent = 'Failed';
+        setTimeout(()=>copyPrompts.textContent='Copy', 1000);
+      }
+    });
+
     // ---- Tab pills
     const pills = [...document.querySelectorAll('.pill')];
     let mode = 'rewrite';
@@ -364,7 +446,6 @@ Draft:
     }
 
     function translateENtoKR(t){
-      // extremely naive: replace known phrases, keep numbers & names
       let out = t;
       for(const [en,kr] of Object.entries(tinyDict)){
         const re = new RegExp("\\b"+en.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')+"\\b","gi");
